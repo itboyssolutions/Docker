@@ -1,0 +1,54 @@
+connect to cluster
+gcloud container clusters get-credentials <cluster-name> --region us-central1 --project acn-deliverylearning-devops
+
+# Create a pod using nginx image
+kubectl run mypod --image=nginx --restart=Never
+
+# Wait a few seconds for pod to start, then list pods
+kubectl get pods
+
+# Exec into the pod's container (use sh for nginx)
+kubectl exec -it mypod -- /bin/sh
+
+# Inside the pod: create and view a file
+echo "hello from inside pod" > /tmp/hello.txt
+cat /tmp/hello.txt
+exit
+
+# List pods again
+kubectl get pods
+
+# Delete the pod
+kubectl delete pod mypod
+
+
+
+
+
+Activity -2 Create pod with yaml 
+
+connect to cluster
+gcloud container clusters get-credentials <cluster-name> --region us-central1 --project acn-deliverylearning-devops
+
+Inside any folder create file nginx-pod.yaml
+copy content from here https://github.com/itboyssolutions/Docker/blob/main/nginx-pod.yaml
+
+# Step 1: Apply the pod definition (nginx-pod.yaml must exist in current directory)
+kubectl apply -f nginx-pod.yaml
+
+# Step 2: Wait for pod to be ready and exec into it
+kubectl get pods
+kubectl exec -it nginx-pod -- /bin/sh
+
+# Inside the pod: create a file and read it
+echo "persistent file" > /data/test.txt
+cat /data/test.txt
+exit
+
+# Step 3: Re-enter pod to verify file still exists
+kubectl exec -it nginx-pod -- /bin/sh
+cat /data/test.txt
+exit
+
+# Step 4: Delete the pod
+kubectl delete pod nginx-pod
