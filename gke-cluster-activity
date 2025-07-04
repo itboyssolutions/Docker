@@ -52,3 +52,45 @@ exit
 
 # Step 4: Delete the pod
 kubectl delete pod nginx-pod
+
+
+
+Actibity-5
+Create auto-pilot-cluster.
+
+#open terminal 
+
+#connect to cluster
+gcloud container clusters get-credentials <cluster-name> --region us-central1 --project acn-deliverylearning-devops
+
+
+vi nginx-app.yaml - copy content from here https://github.com/itboyssolutions/Docker/blob/main/GKE-Ac-5
+
+# Create deployemnt 
+kubectl apply -f nginx-app.yaml
+
+# List pod and otehr objects 
+kubectl get pods
+kubectl get svc nginx-demo-svc
+kubectl get deployment
+kubectl get rs
+
+Access UI using same as of Activity-2 (Open Port FWD and )
+RUN CMD shown on pop-up and access the UI. 
+
+# to modify the image
+kubectl set image deployment/nginx-demo nginx=nginx:1.16.1
+
+#check pods will delete and recreate
+kubectl get pods
+
+#To scale the number of pods
+kubectl scale deployment nginx-demo --replicas=5
+
+# run below to see new pods
+kubectl get deployment nginx-demo
+kubectl get pods
+
+
+
+
