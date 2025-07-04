@@ -56,7 +56,7 @@ kubectl delete pod nginx-pod
 
 
 Actibity-5
-Create auto-pilot-cluster.
+Create auto-pilot-cluste and give name > Create. click 3 dots > connect > login from here. 
 
 #open terminal 
 
