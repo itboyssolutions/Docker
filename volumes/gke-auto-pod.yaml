@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: writer-pod
+  namespace: vol-demo
+spec:
+  containers:
+  - name: busybox
+    image: busybox
+    command: ["/bin/sh","-c","echo Hello Volume > /data/file.txt && sleep 3600"]
+    volumeMounts:
+    - name: storage
+      mountPath: /data
+  volumes:
+  - name: storage
+    persistentVolumeClaim:
+      claimName: demo-pvc
